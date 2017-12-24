@@ -1,0 +1,32 @@
+#!/bin/bash
+
+cmd_exists() {
+    command -v "$1" &> /dev/null
+}
+
+open_url() {
+    if cmd_exists "xdg-open"; then
+        xdg-open "$1"
+    elif cmd_exists "open"; then
+        open "$1"
+    fi
+}
+
+main() {
+    declare -r MAX_NUMBER_OF_TRIES=10
+    local i=0
+    local port="${1:-8000}"
+
+    while [ $i -lt $MAX_NUMBER_OF_TRIES ]; do
+        if [ "$(lsof -i -nP | grep "$port" | grep -i "python")" != "" ]; then
+            open_url "http://localhost:${port}/"
+            break;
+        fi
+        i=$(( i + 1 ))
+        sleep 1
+    done &
+
+    "$(dirname "${BASH_SOURCE[0]}")/server.py" "$port"
+}
+
+main "$@"
