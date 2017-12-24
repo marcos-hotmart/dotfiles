@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+# human readable password generator
+
+import random
+
+name = random.sample(list(open(NAMES_DICT)), 1)
+words = random.sample(list(open(DICT)), 2)
+phrase = name[0].rstrip().lower()
+for word in words:
+    phrase = phrase + word.rstrip().lower()
+print phrase
