@@ -1,5 +1,9 @@
 #!/usr/bin/env/bash
 
+# source utils
+cd "$(dirname "$0")" \
+    && . "../utils.sh"
+
 # add all git functions
 source ~/git/.functions
 
@@ -31,6 +35,12 @@ function f() {
 qfind() {
   find . -exec grep -l -s $1 {} \;
   return 0
+}
+
+# search for string in dir
+# find_text "my path" "string"
+find_text() {
+    grep -rnw "$1" -e "$2"
 }
 
 # create git.io short URL
@@ -149,4 +159,31 @@ json() {
 # defaulting tree
 tree() {
     tree -aC -I '.git|node_modules|build|dist' --dirsfirst "$@" | less -FRNX;
+}
+
+# 🗑
+emptytrash() {
+    print_in_cyan "🗑  Emptying trashes..."
+    sudo rm -rfv /Volumes/*/.Trashes > /dev/null
+    rm -rfv ~/.Trash/* > /dev/null
+    sudo rm -v /private/var/vm/sleepimage > /dev/null
+    print_done
+}
+
+# update everything
+run_update() {
+    print_in_cyan "💅  Updating programs..."
+    brew update > /dev/null
+    print_success "Homebrew updated"
+    npm update -g
+    print_success "Global npm packages updated"
+    print_choice "Update macOS apps"
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        print_done
+        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    else
+        print_in_cyan "💻  Updating macOS apps..."
+        sudo softwareupdate -i -a > /dev/null
+        print_done
+    fi
 }

@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+
+# source utils
 cd "$(dirname "$0")" \
     && . "../utils.sh"
 
@@ -24,11 +27,11 @@ install_npm_packages() {
     echo "📦  Installing global npm packages..."
     for i in "${npmArr[@]}"
     do
-        npm i -g "$i" > /dev/null
-        print_in_green "✔  $i installed\n"
+        npm i -g "$i" --silent
+        print_success "$i installed\n"
     done
     sleep .5
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 install_npm_packages

@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# source utils
 cd "$(dirname "$0")" \
     && . "../utils.sh"
 
 # rev up those fryers
 update_upgrade() {
-    echo "Updating & upgrading... (this may take a bit)"
+    echo "⏫  Updating & upgrading... (this may take a bit)"
     brew update > /dev/null
     # brew upgrade > /dev/null
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 # bash 4
@@ -16,11 +17,11 @@ update_upgrade() {
 # `/usr/local/bin/bash` to `/etc/shells`
 # before running `chsh`
 install_bash() {
-    echo "✏  Installing Bash 4..."
+    echo "🖋  Installing Bash 4..."
     brew install bash > /dev/null
     brew install bash-completion > /dev/null
     brew install homebrew/completions/brew-cask-completions > /dev/null
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 # now use bash4
@@ -30,7 +31,7 @@ use_bash() {
         echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
         chsh -s /usr/local/bin/bash;
     fi;
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 # devtools
@@ -71,17 +72,17 @@ install_tools() {
     for i in "${toolsArr[@]}"
     do
         brew install "$i" > /dev/null
-        print_in_green "✔  $i\n"
+        print_success "$i\n"
     done
     sleep .5
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 ## cask ##
 install_cask() {
     echo "🍺  Tapping caskroom..."
     brew tap caskroom/cask > /dev/null
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 declare -a appsArr=(
@@ -122,10 +123,10 @@ install_apps() {
     for i in "${appsArr[@]}"
     do
         brew cask install "$i" > /dev/null
-        print_in_green "✔  $i\n"
+        print_success "$i\n"
     done
     sleep .5
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 declare -a fontsArr=(
@@ -142,10 +143,10 @@ install_fonts() {
     for i in "${fontsArr[@]}"
     do
         brew cask install "$i" > /dev/null
-        print_in_green "✔  $i\n"
+        print_success "$i"
     done
     sleep .5
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 main() {
@@ -160,7 +161,7 @@ main() {
     install_fonts
     brew cleanup
     sleep .5
-    print_in_purple "✨  Done!\n\n"
+    print_done
 }
 
 main

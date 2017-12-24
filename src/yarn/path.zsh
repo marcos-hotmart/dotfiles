@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # sup yarn
 # https://yarnpkg.com
 

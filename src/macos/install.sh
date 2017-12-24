@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# source utils
 cd "$(dirname "$0")" \
     && . "../utils.sh"
 

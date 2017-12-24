@@ -242,8 +242,14 @@ print_question() {
     print_in_yellow "💬  $1"
 }
 
-print_result() {
+Y='\033[1;33m'
+NC='\033[0m'
 
+print_choice() {
+    read -p "${Y}💬  $1${NC}? (y/n)" -n 1 -r
+}
+
+print_result() {
     if [ "$1" -eq 0 ]; then
         print_success "$2"
     else
@@ -251,22 +257,23 @@ print_result() {
     fi
 
     return "$1"
-
 }
 
 print_success() {
-    print_in_green "✔  $1\n"
+    print_success "✔  $1\n"
 }
 
 print_warning() {
     print_in_yellow "✋  $1\n"
 }
 
-set_trap() {
+print_done() {
+    print_in_purple "✨  Done!"
+}
 
+set_trap() {
     trap -p "$1" | grep "$2" &> /dev/null \
         || trap '$2' "$1"
-
 }
 
 skip_questions() {

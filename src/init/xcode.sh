@@ -28,7 +28,7 @@ if [ "$KEY" = '' ]; then
     print_in_cyan "🛠  Installing XCode Command Line Tools..."
     buildXCode
     sleep 2
-    print_in_green "✔  XCode installed"
+    print_success "XCode installed"
 else
     exit 0
 fi

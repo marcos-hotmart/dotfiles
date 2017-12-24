@@ -1,3 +1,9 @@
+#!/usr/bin/env zsh
+
+# source utils
+cd "$(dirname "$0")" \
+    && . "../utils.sh"
+
 # clone a repo, cd into it, install
 gcl() {
     git clone --depth=1 $1
@@ -52,3 +58,7 @@ lrb = "!f() { \
     git ls-remote --heads "$remote"; \
 }; f"
 
+# use gitignore.io cmd line tool
+gi() {
+    curl -L -s https://www.gitignore.io/api/$@ ;
+}

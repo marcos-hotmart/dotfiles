@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# source utils
+cd "$(dirname "$0")" \
+    && . "../utils.sh"
+
 # sets up a new local repo
 # creates a new remote repo
 # then pushes an initial commit

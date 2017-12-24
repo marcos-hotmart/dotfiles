@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# source utils
+cd "$(dirname "$0")" \
+    && . "../utils.sh"
+
+clear_space() {
+    print_in_cyan "♻  Attempting to free some space..."
+    # cleanup sys logs and tmp files
+    sudo periodic daily weekly monthly
+    print_success "cleaned up sys logs and temp files"
+    brew cleanup -n
+    brew cleanup
+    print_success "cleaned up homebrew"
+    cask cleanup
+    ~/Library/Caches/Google/Chrome/Default
+    print_success "clean app caches"
+    rm -rf ~/Library/Caches/com.apple.dt.Xcode
+    ~/Library/Developer/Shared/Documentation/DocSets
+    /Applications/Xcode.app/Contents/Developer/Documentation/DocSets
+    print_success "clean xcode caches"
+    emptytrash
+}
+
+clear_space
