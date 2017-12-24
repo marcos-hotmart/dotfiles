@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Deletes a branch locally and on origin remote
+
+git branch -D $1
+git push origin :$1

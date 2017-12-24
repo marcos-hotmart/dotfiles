@@ -1,12 +1,12 @@
 # clone a repo, cd into it, install
-function gcl() {
+gcl() {
     git clone --depth=1 $1
     cd $(basename ${1%.*})
     yarn install
 }
 
 # list git branches all pretty
-function branches() {
+branches() {
   for branch in $(git branch | sed s/^..//); do
     time_ago=$(git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $branch --);
     # Add emoji to mark upstream tracking
@@ -18,13 +18,13 @@ function branches() {
 # use git's colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
-  function diff() {
+  diff() {
     git diff --no-index --color-words "$@";
   }
 fi;
 
 # undo push
-function undopush() {
+undopush() {
   BRANCHNAME=$1
 
   git push -f origin HEAD^:$1

@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Set branch to rack a remote
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+git branch $branch --set-upstream-to-origin/$branch
