@@ -7,7 +7,8 @@ cd "$(dirname "$0")" \
 print_in_cyan "\n🛠  Setting macOS defaults\n"
 sleep 2
 
-sh ./set-defaults.sh
+./set-defaults
+./xcode
 
 sleep 2
 print_in_purple "\n✨  Done!\n"

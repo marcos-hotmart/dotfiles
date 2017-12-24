@@ -2,7 +2,7 @@
 
 # source
 cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "utils.sh"
+    && . "helpers.sh"
 
 main() {
     print_warning "Restart required"

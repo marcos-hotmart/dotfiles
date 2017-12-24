@@ -2,10 +2,13 @@
 
 # source utils
 cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "utils.sh"
+    && . "helpers.sh"
 
 create_symlinks() {
     declare -a FILES_TO_SYMLINK=(
+        "git/aliases.zsh"
+        "git/functions.zsh"
+
         "shell/aliases/core"
         "shell/aliases/npm"
         "shell/aliases/utils"
@@ -16,9 +19,6 @@ create_symlinks() {
         "shell/.bashrc"
         "shell/.exports"
         "shell/.functions"
-
-        "git/aliases.zsh"
-        "git/functions.zsh"
 
         "tmux/tmux.conf"
 

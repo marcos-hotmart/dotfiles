@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "utils.sh"
+    && . "helpers.sh"
 
 create_bash_local() {
     declare -r FILE_PATH="$HOME/.bash.local"

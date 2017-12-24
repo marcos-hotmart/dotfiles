@@ -8,7 +8,7 @@ cd "$(dirname "$0")" \
 source ~/git/.functions
 
 # copy SSH key to clipboard
-myssh() {
+copyssh() {
   if pbcopy < ~/.ssh/id_rsa.pub ; then
     echo '🔑  → 📋  ssh key copied to clipboard!'
   else
