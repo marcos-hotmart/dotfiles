@@ -116,6 +116,7 @@ declare -a appsArr=(
     "spark"
     "istat-menus"
     "bartender"
+    "neofetch"
 )
 
 install_apps() {
