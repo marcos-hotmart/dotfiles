@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$(dirname "$0")" \
-    && . "../utils.sh"
+    && . "../utils/helpers.sh"
 
 install_homebrew() {
     if ! cmd_exists "brew"; then

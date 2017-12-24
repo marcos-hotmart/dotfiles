@@ -1,5 +1,5 @@
 cd "$(dirname "$0")" \
-    && . "../utils.sh"
+    && . "../utils/helpers.sh"
 
 buildXCode() {
     if ! xcode-select --print-path &> /dev/null; then

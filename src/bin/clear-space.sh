@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils.sh"
+    && . "../utils/helpers.sh"
 
 clear_space() {
     print_in_cyan "♻  Attempting to free some space..."
@@ -11,6 +11,8 @@ clear_space() {
     print_success "cleaned up sys logs and temp files"
     brew cleanup -n
     brew cleanup
+    brew cask cleanup
+    brew prune
     print_success "cleaned up homebrew"
     cask cleanup
     ~/Library/Caches/Google/Chrome/Default

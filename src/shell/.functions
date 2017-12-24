@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils.sh"
+    && . "../utils/helpers.sh"
 
 # add all git functions
 source ~/git/.functions
@@ -173,17 +173,18 @@ emptytrash() {
 # update everything
 run_update() {
     print_in_cyan "💅  Updating programs..."
-    brew update > /dev/null
+    brew -v update > /dev/null
+    brew upgrade --force-bottle --cleanup
     print_success "Homebrew updated"
     npm update -g
     print_success "Global npm packages updated"
-    print_choice "Update macOS apps"
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        print_done
-        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-    else
+    ask_for_confirmation "Update macOS apps?"
+    if answer_is_yes; then
         print_in_cyan "💻  Updating macOS apps..."
         sudo softwareupdate -i -a > /dev/null
         print_done
+    else
+        print_done
+        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
     fi
 }
