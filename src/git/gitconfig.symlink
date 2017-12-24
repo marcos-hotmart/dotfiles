@@ -1,0 +1,35 @@
+[include]
+    path = ~/.gitconfig.local
+
+[hub]
+    protocol = https
+
+[alias]
+    wtf = !ZSH/bin/git-wtf
+
+[color]
+    ui = true
+
+[core]
+    editor = code
+    excludesfile = ~/.gitignore
+
+[format]
+    pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+    graph = true
+
+
+[apply]
+    whitespace = nowarn
+
+[mergetool]
+    keepBackup = false
+
+[difftool]
+    prompt = false
+
+[help]
+    autocorrect = 1
+
+[push]
+    default = simple

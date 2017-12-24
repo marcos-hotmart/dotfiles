@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+for file in ./alias/.{core,npm,yarn,utils}; do
+  [ -r "$file" ] && source "$file"
+done
+unset file
+
+# source git functions
+source ~/git/.aliases

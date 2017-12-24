@@ -1,0 +1,64 @@
+#!/usr/bin/env zsh
+
+# use `hub` as git wrapper
+# http://defunkt.github.com/hub/
+hub_path=$(which hub)
+if (( $+commands[hub] ))
+then
+    alias git=$hub_path
+fi
+
+alias g="git"
+
+# adding
+alias ga="git add"
+alias gaa="git add ."
+alias gra="git remote add origin"
+
+# branches
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gbdd="git branch -D"
+alias gch="git checkout"
+alias gcb="git checkout -b"
+
+# cherry-pick
+alias gcp="git cherry-pick"
+
+# commit
+alias gca="git commit -am"
+alias gc="git commit -m"
+alias gcm="git commit --amend"
+
+# diff
+alias gdt="git difftool"
+alias gd="git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r"
+
+# push
+alias gp="git push"
+alias gpu="git push -u origin"
+alias undopush="git push -f origin HEAD^:master"
+
+# rebase
+alias gre="git rebase"
+
+# stash
+alias gst="git stash"
+alias gsa="git stash apply"
+alias gsp="git stash pop"
+alias gsd="git stash drop"
+
+# remote
+alias gh="git@github.com"
+
+# view issues
+alias gbi="git browse -- issues"
+
+# pull-request
+alias gpr="git pull-request"
+
+# fetch
+alias gf="git fetch"
+
+# create remote repo
+alias gcr="$HOME/dotfiles/git/setup.sh"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# add ~/bin to path
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+export PATH
+PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+PATH=/opt/local/bin:/opt/local/sbin:"$PATH"
+
+# prefer US English & utf-8
+export LC_ALL="en_US.UTF-8";
+export LANG="en_US";
+
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+
+# npm global
+export NPM_PACKAGES="/usr/local/npm_packages"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+# add to PATH
+export PATH="$NPM_PACKAGES/bin:$PATH"
+
+# mongodb
+export PATH="/usr/local/opt/mongodb@3.0/bin:$PATH"

@@ -1,0 +1,152 @@
+#!/usr/bin/env/bash
+
+# add all git functions
+source ~/git/.functions
+
+# copy SSH key to clipboard
+myssh() {
+  if pbcopy < ~/.ssh/id_rsa.pub ; then
+    echo '🔑  → 📋  ssh key copied to clipboard!'
+  else
+    echo '😩  something went wrong!'
+  fi
+}
+
+# make new dir and cd into it
+take() {
+  mkdir -p $1; cd $1;
+}
+
+# cd into whatever is in the forefront finder window
+cdf() {
+  cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+}
+
+# find stuff
+function f() {
+  find . -name "$1" 2>&1 | grep -v '🚫  Permission denied'
+}
+
+# find stuff faster
+qfind() {
+  find . -exec grep -l -s $1 {} \;
+  return 0
+}
+
+# create git.io short URL
+gitio() {
+  if [ -z "${1}" -o -z "${2}" ]; then
+    echo "Usage \`gitio slug url\`"
+    return 1
+  fi
+  curl -i http://git.io/ -F "url=${2}" -F "code=${1}"
+}
+
+# change dir
+up() {
+  local cdir="$(pwd)"
+  if [[ "${1}" == "" ]]; then
+    cdir="$(dirname) "${cdir}")"
+  elif ! [[ "${1}" =~ ^[0-9]+$ ]]; then
+    echo "🛂  Arg must be a number"
+  elif ! [[ "${1}" -gt "0" ]]; then
+    echo "a POSITIVE number"
+  else
+    for i in {1..${1}}; do
+      local ncdir="$(dirname "${cdir}")"
+      if [[ "${cdir}" == "${ncdir}" ]]; then
+        break
+      else
+        cdir="${ncdir}"
+      fi
+    done
+  fi
+  cd "${cdir}"
+}
+
+# see who's using the laptop camera
+ispy() {
+  echo "Checking to see who's using the camera.. 📸"
+  usedby=$(lsof | ggrep -w "AppleCamera\|USBVDC\|iSight" | gawk '{printf $2"\n"}' | xargs ps)
+  echo -e "Recent camera uses:\n$usedby"
+}
+
+# automatically list contents on `cd`
+auto-ls() {
+  emulate -L zsh;
+  hash gls >/dev/null 2>&1 && CLICOLOR_FORCE=1 gls -aFh --color --group-directories-first || ls
+}
+chpwd_functions=( auto-ls $chpwd_functions )
+
+# copy w progress
+cp_p() {
+    rsync -WavP --human-readable --progress $1 $2
+}
+
+# whois a domain or a URL
+whois() {
+	local domain=$(echo "$1" | awk -F/ '{print $3}') # get domain from URL
+	if [ -z $domain ] ; then
+		domain=$1
+	fi
+	echo "🔍  Getting whois record for: $domain …"
+	/usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
+}
+
+# get local ip
+localip(){
+	function _localip(){ echo "📶  "$(ipconfig getifaddr "$1"); }
+	export -f _localip
+	local purple="\x1B\[35m" reset="\x1B\[m"
+	networksetup -listallhardwareports | \
+		sed -r "s/Hardware Port: (.*)/${purple}\1${reset}/g" | \
+		sed -r "s/Device: (en.*)$/_localip \1/e" | \
+		sed -r "s/Ethernet Address:/📘 /g" | \
+		sed -r "s/(VLAN Configurations)|==*//g"
+}
+
+# animated gifs from any video
+# https://gist.github.com/SlexAxton/4989674
+gifify() {
+  if [[ -n "$1" ]]; then
+	if [[ $2 == '--good' ]]; then
+	  ffmpeg -i "$1" -r 10 -vcodec png out-static-%05d.png
+	  time convert -verbose +dither -layers Optimize -resize 900x900\> out-static*.png  GIF:- | gifsicle --colors 128 --delay=5 --loop --optimize=3 --multifile - > "$1.gif"
+	  rm out-static*.png
+	else
+	  ffmpeg -i "$1" -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$1.gif"
+	fi
+  else
+	echo "✋  proper usage: gifify <input_movie.mov>. You DO need to include extension."
+  fi
+}
+
+# shove it all into a black hole
+nullify() {
+    "$@" > /dev/null 2>&1
+}
+
+# delete files that match a certain pattern
+delete-files() {
+    local q="${1:-*.DS_Store}"
+    find . -type f -name "$q" -ls -delete
+}
+
+# search for text within current dir
+qt() {
+    grep -ir --color=always "$*" --exclude-dir=".git" --exclude-dit="node_modules" . | less -RX
+}
+
+# syntax highlight JSON
+json() {
+    if [ -t 0 ]; then
+        python -mjson.tool <<< "$*" | pygmentize -l javascript;
+    else
+        python -mjson.tool | pygmentize -l javascript;
+    fi
+}
+
+# defaulting tree
+tree() {
+    tree -aC -I '.git|node_modules|build|dist' --dirsfirst "$@" | less -FRNX;
+}

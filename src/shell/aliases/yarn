@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+
+alias y="yarn"
+alias yi="yarn init"
+alias ya="yarn add"
+alias yad="yarn add --dev"
+alias yga="yarn global add"
+alias yr="yarn run"
+alias ys="yarn start"
+alias yis="yarn install && yarn start"
+alias yrm="yarn remove"
+alias yup="yarn upgrade"
+alias ycl="yarn clean"
+alias ych="yarn check"
+alias yt="yarn test"
+alias ycc="yarn cache clean"

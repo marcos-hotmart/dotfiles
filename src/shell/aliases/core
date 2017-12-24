@@ -1,0 +1,43 @@
+# shortcuts
+alias md="mkdir"
+alias t="touch"
+alias x="exit"
+alias c="clear"
+alias o="open ."
+alias v="vim"
+alias vi="vim"
+alias x+="chmod +x"
+alias bye="sudo shutdown"
+alias get="curl -O -L"
+alias vi="vim"
+alias tk="take"
+alias reload="source ~/.zshrc"
+
+# upgrade `ls`
+hash gls >/dev/null 2>&1 || alias gls="ls"
+
+# always use color
+if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
+export CLICOLOR_FORCE=1
+
+# ls flags
+alias ls="gls -AFh ${colorflag} --group-directories-first'
+alias lsd='ls -l | grep "^d"'
+
+# lets use coreutils
+alias awk="gawk"
+alias grep="ggrep --color"
+alias mv="gmv -v"
+alias rm="grm -v"
+alias cp="gcp -v"
+alias cat="gcat"
+alias printf="gprintf"
+alias tail="gtail"
+alias sort="gsort"
+alias split="gsplit"
+
+# commonly used dirs
+# dirs
+alias dev="cd ~/dev"
+alias dt="cd ~/desktop"
+alias dl="cd ~/downloads"
