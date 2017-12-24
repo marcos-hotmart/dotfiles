@@ -117,6 +117,7 @@ declare -a appsArr=(
     "istat-menus"
     "bartender"
     "neofetch"
+    "htop"
 )
 
 install_apps() {
