@@ -23,7 +23,7 @@ update_plugins() {
 }
 
 main() {
-    print_header "Setting up Vim"
+    print_header "📝  Setting up Vim"
 
     printf "\n"
 
