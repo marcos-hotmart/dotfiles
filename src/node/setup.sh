@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 declare -a npmArr=(
     "npm"

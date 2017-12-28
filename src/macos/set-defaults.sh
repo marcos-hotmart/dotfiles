@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 # Close any open system preferences panes
 osascript -e 'tell application "System Preferences" to quit'

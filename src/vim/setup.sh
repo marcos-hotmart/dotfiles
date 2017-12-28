@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 install_plugins() {
     declare -r VUNDLE_DIR="$HOME/.vim/plugins/Vundle.vim"

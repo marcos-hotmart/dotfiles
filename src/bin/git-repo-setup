@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 # sets up a new local repo
 # creates a new remote repo

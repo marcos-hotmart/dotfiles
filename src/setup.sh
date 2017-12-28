@@ -3,7 +3,7 @@
 declare -r GITHUB_REPO="gretzky/dotfiles"
 declare -r DOTFILES_ORIGIN="git@github.com:$GITHUB_REPO.git"
 declare -r DOTFILES_TARBALL_URL="https://github.com/$GITHUB_REPO/tarball/master"
-declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPO/master/src/utils/helpers.sh"
+declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPO/master/src/init/helpers.sh"
 
 declare dotfilesDir="$HOME/dev/dotfiles"
 declare skipQuestions=false

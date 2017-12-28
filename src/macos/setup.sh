@@ -2,7 +2,7 @@
 
 # source utils
 cd "$(dirname "$0")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 print_header "\n🛠  Setting macOS defaults\n"
 sleep 2
