@@ -163,7 +163,7 @@ tree() {
 
 # 🗑
 emptytrash() {
-    print_in_cyan "🗑  Emptying trashes..."
+    print_header "🗑  Emptying trashes..."
     sudo rm -rfv /Volumes/*/.Trashes > /dev/null
     rm -rfv ~/.Trash/* > /dev/null
     sudo rm -v /private/var/vm/sleepimage > /dev/null
@@ -172,7 +172,7 @@ emptytrash() {
 
 # update everything
 run_update() {
-    print_in_cyan "💅  Updating programs..."
+    print_header "💅  Updating programs..."
     brew -v update > /dev/null
     brew upgrade --force-bottle --cleanup
     print_success "Homebrew updated"
@@ -180,7 +180,7 @@ run_update() {
     print_success "Global npm packages updated"
     ask_for_confirmation "Update macOS apps?"
     if answer_is_yes; then
-        print_in_cyan "💻  Updating macOS apps..."
+        print_header "💻  Updating macOS apps..."
         sudo softwareupdate -i -a > /dev/null
         print_done
     else

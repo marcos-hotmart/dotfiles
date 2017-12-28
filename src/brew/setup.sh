@@ -25,14 +25,14 @@ opt_out_of_analytics() {
 }
 
 main() {
-    print_in_cyan "\n🍺  Installing Homebrew...\n"
+    print_header "\n🍺  Installing Homebrew...\n"
 
     install_homebrew
     opt_out_of_analytics
 
     print_in_purple "\n✨  Done!\n"
 
-    print_in_cyan "\n🍻  Installing packages...\n"
+    print_header "\n🍻  Installing packages...\n"
     ./brew.sh
 
     print_in_purple "\n✨  Done!\n"

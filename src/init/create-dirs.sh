@@ -15,7 +15,7 @@ create_dirs() {
 }
 
 main() {
-    print_in_cyan "🗄  Creating directories..."
+    print_header "🗄  Creating directories..."
     create_dirs
     print_done
 }

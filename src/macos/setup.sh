@@ -4,7 +4,7 @@
 cd "$(dirname "$0")" \
     && . "../utils/helpers.sh"
 
-print_in_cyan "\n🛠  Setting macOS defaults\n"
+print_header "\n🛠  Setting macOS defaults\n"
 sleep 2
 
 ./set-defaults

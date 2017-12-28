@@ -63,7 +63,7 @@ test_ssh_connection() {
 }
 
 main() {
-    print_in_cyan "🔑  Set Github SSH keys"
+    print_header "🔑  Set Github SSH keys"
     if ! is_git_repo; then
         print_error "Not a git repo"
         exit 1

@@ -25,7 +25,7 @@ N='\033[0m'
 
 read -n1 -r -p "${Y}🔑  Press any key to continue${NC}" KEY
 if [ "$KEY" = '' ]; then
-    print_in_cyan "🛠  Installing XCode Command Line Tools..."
+    print_header "🛠  Installing XCode Command Line Tools..."
     buildXCode
     sleep 2
     print_success "XCode installed"

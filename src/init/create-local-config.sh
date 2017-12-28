@@ -44,7 +44,7 @@ create_vimrc_local() {
 }
 
 main() {
-    print_in_cyan "🏡  Create local configs"
+    print_header "🏡  Create local configs"
     create_bash_local
     create_gitconfig_local
     create_vimrc_local

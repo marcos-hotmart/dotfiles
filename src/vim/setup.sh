@@ -23,7 +23,7 @@ update_plugins() {
 }
 
 main() {
-    print_in_cyan "Setting up Vim"
+    print_header "Setting up Vim"
 
     printf "\n"
 

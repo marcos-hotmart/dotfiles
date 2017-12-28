@@ -242,6 +242,10 @@ print_question() {
     print_in_yellow "💬  $1"
 }
 
+print_header() {
+    print_in_cyan "$1 \n"
+}
+
 Y='\033[1;33m'
 NC='\033[0m'
 

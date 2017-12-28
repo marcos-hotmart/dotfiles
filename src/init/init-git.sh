@@ -23,7 +23,7 @@ initialize_git_repo() {
 }
 
 main() {
-    print_in_cyan "🏎  Initializing the git repo..."
+    print_header "🏎  Initializing the git repo...\n"
     initialize_git_repo "$1"
     print_done
 }

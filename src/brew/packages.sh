@@ -152,7 +152,7 @@ install_fonts() {
 }
 
 main() {
-    print_in_cyan "🍺  Installing Homebrew packages\n\n"
+    print_header "🍺  Installing Homebrew packages\n\n"
     sleep 1
     update_upgrade
     install_bash

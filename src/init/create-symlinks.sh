@@ -61,7 +61,7 @@ create_symlinks() {
 }
 
 main() {
-    print_in_cyan "🔗  Creating symbolic links..."
+    print_header "🔗  Creating symbolic links..."
     create_symlinks "$@"
 }
 

@@ -23,7 +23,7 @@ download() {
 download_dotfiles() {
     local tmpFile=""
 
-    print_in_cyan "⏬ Downloading and extracting archive..."
+    print_header "⏬ Downloading and extracting archive..."
 
     tmpFile="$(mktemp /tmp/XXXXX)"
 
@@ -171,13 +171,13 @@ main() {
 
     if cmd_exists "git"; then
         if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
-            print_in_cyan "Initializing git repo in this folder..."
+            print_header "Initializing git repo in this folder..."
             ./init/init-git.sh "$DOTFILES_ORIGIN"
             print_done
         fi
 
         if ! $skipQuestions; then
-            print_in_cyan "Updating this repo"
+            print_header "Updating this repo"
             ./init/update-dotfiles.sh
             print_done
         fi
