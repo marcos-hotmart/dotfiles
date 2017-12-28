@@ -12,7 +12,7 @@ main() {
             || return 1
     fi
 
-    ask_for_confirmation "Do you want to update your dotfiles?"
+    confirm "Do you want to update your dotfiles?"
 
     if answer_is_yes; then
         git fetch --all 1> /dev/null \

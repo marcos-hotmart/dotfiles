@@ -178,7 +178,7 @@ run_update() {
     print_success "Homebrew updated"
     npm update -g
     print_success "Global npm packages updated"
-    ask_for_confirmation "Update macOS apps?"
+    confirm "Update macOS apps?"
     if answer_is_yes; then
         print_header "💻  Updating macOS apps..."
         sudo softwareupdate -i -a > /dev/null

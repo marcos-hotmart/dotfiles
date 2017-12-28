@@ -7,7 +7,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 main() {
     print_warning "Restart required"
     sleep .5
-    ask_for_confirmation "Do you want to restart?"
+    confirm "Do you want to restart?"
     printf "\n"
 
     if answer_is_yes; then

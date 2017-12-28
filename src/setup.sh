@@ -32,7 +32,7 @@ download_dotfiles() {
     printf "\n"
 
     if ! $skipQuestions; then
-        ask_for_confirmation "Do you want to store the dotfiles in '$dotfilesDir'?"
+        confirm "Do you want to store the dotfiles in '$dotfilesDir'?"
 
         if ! answer_is_yes; then
             dotfilesDir=""
@@ -43,7 +43,7 @@ download_dotfiles() {
         fi
 
         while [ -e "$dotfilesDir" ]; do
-            ask_for_confirmation "'$dotfilesDir' already exists, overwrite?"
+            confirm "'$dotfilesDir' already exists, overwrite?"
 
             if answer_is_yes; then
                 rm -rf "$dotfilesDir"

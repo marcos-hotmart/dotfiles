@@ -46,7 +46,7 @@ create_symlinks() {
             print_success "$targetFile → $sourceFile"
         else
             if ! $skipQuestions; then
-                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+                confirm "'$targetFile' already exists, do you want to overwrite it?"
                 if answer_is_yes; then
                     rm -rf "$targetFile"
                     execute \
