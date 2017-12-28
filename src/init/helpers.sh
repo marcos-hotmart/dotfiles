@@ -244,6 +244,7 @@ print_question() {
 
 print_header() {
     print_in_cyan "$1 \n"
+    sleep .5
 }
 
 Y='\033[1;33m'

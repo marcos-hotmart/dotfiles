@@ -23,7 +23,7 @@ initialize_git_repo() {
 }
 
 main() {
-    print_header "🏎  Initializing the git repo...\n"
+    print_header "🏎  Initializing the git repo..."
     initialize_git_repo "$1"
     print_done
 }
