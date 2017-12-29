@@ -15,6 +15,8 @@ src/
 └── zsh         > zsh settings and prompts
 ```
 
+**☠ abandon all hope ye who enter here (in active development)**
+
 # usage
 
 `setup.sh` will kick everything off for you, but i wouldn't recommend using it unless you know absolutely everything that's going on in there.
