@@ -1,14 +1,14 @@
 #!/bin/bash
 
 cd "$(dirname "$0")" \
-    && . "../utils/helpers.sh"
+    && . "../init/helpers.sh"
 
 install_homebrew() {
     if ! cmd_exists "brew"; then
         printf "\n" | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &> /dev/null
     fi
 
-    print_result $? "Homebrew"
+    print_result $? "Install Homebrew"
 }
 
 opt_out_of_analytics() {
@@ -25,17 +25,17 @@ opt_out_of_analytics() {
 }
 
 main() {
-    print_in_cyan "\n🍺  Installing Homebrew...\n"
+    print_header "🍺  Installing Homebrew..."
 
     install_homebrew
     opt_out_of_analytics
 
-    print_in_purple "\n✨  Done!\n"
+    print_done
 
-    print_in_cyan "\n🍻  Installing packages...\n"
+    print_header "🍻  Installing packages..."
     ./brew.sh
 
-    print_in_purple "\n✨  Done!\n"
+    print_done
 }
 
 main
