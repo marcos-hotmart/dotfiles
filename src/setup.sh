@@ -12,7 +12,9 @@ download() {
     local url="$1"
     local output="$2"
 
-    if command -v "wget" &> /dev/null; then
+    if command -v "curl" &> /dev/null; then
+        return $?
+    elif command -v "wget" &> /dev/null; then
         wget -qO "$output" "$url" &> /dev/null
         return $?
     fi
@@ -72,7 +74,7 @@ download_dotfiles() {
     rm -rf "$tmpFile"
     print_result $? "Remove archive"
 
-    cd "$dotfilesDir/utils" \
+    cd "$dotfilesDir/src" \
         || return 1
 }
 
@@ -100,7 +102,7 @@ extract() {
 }
 
 verify_os() {
-    declare -r MINIMUM_MACOS_VERSION="10.1"
+    declare -r MINIMUM_MACOS_VERSION="10.10"
 
     local os_name=""
     local os_version=""
@@ -124,7 +126,7 @@ verify_os() {
 }
 
 main() {
-    echo "\n      ██            ██     ████ ██  ██
+    echo "      ██            ██     ████ ██  ██
      ░██           ░██    ░██░ ░░  ░██
      ░██  ██████  ██████ ██████ ██ ░██  █████   ██████
   ██████ ██░░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░
@@ -142,11 +144,12 @@ main() {
  ░░░░░░░░░░
 "
     sleep 1
+
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
-    if [ -x "helpers.sh" ]; then
-        . "helpers.sh" || exit 1
+    if [ -x "./init/helpers.sh" ]; then
+        . "./init/helpers.sh" || exit 1
     else
         download_utils || exit 1
     fi
@@ -164,6 +167,7 @@ main() {
 
     ./init/create-dirs.sh
     ./init/create-symlinks.sh "$@"
+    ./init/create_local_config.sh
     ./macos/setup.sh
     ./brew/setup.sh
     ./vim/setup.sh
