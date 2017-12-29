@@ -145,11 +145,11 @@ main() {
 "
     sleep 1
 
-    cd "$(dirname "${BASH_SOURCE[0]}")/src" \
+    cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
-    if [ -x "helpers.sh" ]; then
-        . "helpers.sh" || exit 1
+    if [ -x "src/init/helpers.sh" ]; then
+        . "src/init/helpers.sh" || exit 1
     else
         download_utils || exit 1
     fi
