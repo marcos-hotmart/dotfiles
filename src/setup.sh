@@ -74,7 +74,7 @@ download_dotfiles() {
     rm -rf "$tmpFile"
     print_result $? "Remove archive"
 
-    cd "$dotfilesDir/src" \
+    cd "$dotfilesDir" \
         || return 1
 }
 
@@ -148,8 +148,8 @@ main() {
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
-    if [ -x "src/init/helpers.sh" ]; then
-        . "src/init/helpers.sh" || exit 1
+    if [ -x "./src/init/helpers.sh" ]; then
+        . "./src/init/helpers.sh" || exit 1
     else
         download_utils || exit 1
     fi
