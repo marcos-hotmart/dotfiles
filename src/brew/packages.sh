@@ -102,6 +102,7 @@ declare -a appsArr=(
     "rescuetime"
     "slack"
     "discord"
+    "skype"
     "sketch"
     "sketch-toolbox"
     "eagle"
@@ -114,10 +115,11 @@ declare -a appsArr=(
     "steam"
     "macdown"
     "spark"
-    "istat-menus"
-    "bartender"
     "neofetch"
     "htop"
+    "vanilla"
+    "endurance"
+    "textual"
 )
 
 install_apps() {
