@@ -115,11 +115,11 @@ verify_os() {
         if is_supported_version "$os_version" "$MINIMUM_MACOS_VERSION"; then
             return 0
         else
-            print_error "Sorry, this script is intended only for macOS %s+" "$MINIMUM_MACOS_VERSION"
+            print_error "😭  Sorry, this script is intended only for macOS %s+" "$MINIMUM_MACOS_VERSION"
         fi
 
     else
-        print_error "Sorry, this script is intended only for macOS"
+        print_error "😭  Sorry, this script is intended only for macOS"
     fi
 
     return 1
@@ -148,8 +148,8 @@ main() {
     cd "$(dirname "${BASH_SOURCE[0]}")" \
         || exit 1
 
-    if [ -x "./src/init/helpers.sh" ]; then
-        . "./src/init/helpers.sh" || exit 1
+    if [ -x "./init/helpers.sh" ]; then
+        . "./init/helpers.sh" || exit 1
     else
         download_utils || exit 1
     fi
