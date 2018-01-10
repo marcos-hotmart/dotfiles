@@ -1,0 +1,92 @@
+# upgrade `ls`
+hash gls >/dev/null 2>&1 || alias gls="ls"
+
+# always use color
+if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
+export CLICOLOR_FORCE=1
+
+# ls flags
+alias ls="gls -AFh ${colorflag} --group-directories-first'
+alias lsd='ls -l | grep "^d"'
+
+###
+# coreutils
+###
+
+# files output
+alias cat="gcat"
+alias tail="gtail"
+alias split="gsplit"
+alias csplit="gcsplit"
+
+# summarizing files
+alias sum="gsum"
+alias cksum="cksum"
+alias md5sum="gmd5sum"
+alias sha1sum="gsha1sum"
+
+# operating on fields
+alias cut="gcut"
+alias paste="gpaste"
+alias join="gjoin"
+
+# basic ops
+alias cp="gcp -v"
+alias dd="gdd"
+alias mv="gmv -v"
+alias rm="grm -v"
+alias shred="gshred"
+
+# special filetypes
+alias link="glink"
+alias unlink="gunlink"
+alias mkdir="gmkdir -v"
+alias rmdir="grmdir -v"
+alias readlink="greadlink"
+
+# changing file attributes
+alias chmod="gchmod -v"
+alias chown="gchown -v"
+alias chgrp="gchgrp -v"
+alias touch="gtouch -v"
+
+# disk usage
+alias df="gdf"
+alias du="gdu"
+alias stat="gstat"
+alias sync="gsync"
+alias truncate="gtruncate"
+
+# printing text
+alias echo="gecho"
+alias printf="gprintf"
+
+# redirection
+alias tee="gtee"
+
+# the rest
+alias awk="gawk"
+alias grep="ggrep --color"
+
+alias ln="gln"
+
+# findutils
+alias find="gfind"
+alias locate="glocate"
+alias updatedb="gupdatedb"
+alias xargs="gxargs"
+
+# binutils
+alias addr2line="gaddr2line"
+alias ar="gar"
+alias c++filt="gc++filt"
+alias dlltool="gdlltool"
+alias nlmconv="gnlmconv"
+alias nm="gnm"
+alias objcopy="gobjcopy"
+alias objdump="gobjdump"
+alias ranlib="granlib"
+alias readelf="greadelf"
+alias size="gsize"
+alias strings="gstrings" # lol
+alias strip="gstrip"
