@@ -1,0 +1,10 @@
+# no, i don't save my extensions or bookmarks to my username
+
+1password
+fontface ninja
+honey
+react dev tools
+res
+redux dev tools
+whatruns
+unsplash instant
