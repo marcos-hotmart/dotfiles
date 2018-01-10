@@ -4,22 +4,20 @@
 cd "$(dirname "${BASH_SOURCE[0]}")" \
     && . "helpers.sh"
 
-# we only have one to make
-# so let's just make it easy
-#
-# create_dirs() {
-#     declare -a DIRS=(
-#         "$HOME/Downloads/torrents"
-#     )
+create_dirs() {
+    declare -a DIRS=(
+        "$HOME/Downloads/torrents"
+        "$HOME/Desktop/screenshots"
+    )
 
-#     for i in "${DIRS[@]}"; do
-#         mkd "$i"
-#     done
-# }
+    for i in "${DIRS[@]}"; do
+        mkd "$i"
+    done
+}
 
 main() {
     print_header "🗄  Creating directories..."
-    mkdir $HOME/Documents/Torrents
+    create_dirs
     print_done
 }
 

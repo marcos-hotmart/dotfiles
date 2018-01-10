@@ -7,7 +7,7 @@ cd "$(dirname "$0")" \
 print_header "\n🛠  Setting macOS defaults\n"
 sleep 2
 
-./set-defaults.sh
+./prefs/main.sh
 ./xcode.sh
 
 sleep 2

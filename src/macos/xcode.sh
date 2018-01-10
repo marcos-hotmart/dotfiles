@@ -23,12 +23,21 @@ buildXCode() {
 Y='\033[1;33m'
 N='\033[0m'
 
+setXcodePrefs() {
+    sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+    print_success "Add iOS Simulator to Launchpad"
+
+    sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+    print_success "Add Watch Simulator to Launchpad"
+}
+
 read -n1 -r -p "${Y}🔑  Press any key to continue${NC}" KEY
 if [ "$KEY" = '' ]; then
-    print_header "🛠  Installing XCode Command Line Tools..."
+    print_header "🛠  Installing Xcode Command Line Tools..."
     buildXCode
     sleep 2
     print_success "XCode installed"
+    print_in_blue "Setting Xcode preferences"
 else
     exit 0
 fi
