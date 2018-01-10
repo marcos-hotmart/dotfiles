@@ -15,7 +15,7 @@ alias lsd='ls -l | grep "^d"'
 
 # files output
 alias cat="gcat"
-alias tail="gtail"
+alias tail="gtail -F" # follows log rotations
 alias split="gsplit"
 alias csplit="gcsplit"
 
@@ -32,7 +32,6 @@ alias join="gjoin"
 
 # basic ops
 alias cp="gcp -v"
-alias dd="gdd"
 alias mv="gmv -v"
 alias rm="grm -v"
 alias shred="gshred"
@@ -69,6 +68,7 @@ alias awk="gawk"
 alias grep="ggrep --color"
 
 alias ln="gln"
+alias ln-sym="gln -nsf" # symlinks
 
 # findutils
 alias find="gfind"
@@ -90,3 +90,9 @@ alias readelf="greadelf"
 alias size="gsize"
 alias strings="gstrings" # lol
 alias strip="gstrip"
+
+# sed
+alias sed="gsed"
+
+# which
+alias which="gwhich"
