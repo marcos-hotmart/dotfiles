@@ -1,10 +1,26 @@
 set nocompatible
+filetype off
+
+" vundle!
+" https://github.com/VundleVim/Vundle.vim
+
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'dracula/vim'
+
+call vundle#end()
+
+filetype plugin indent on
+
 syntax on
-colorscheme onedark
+color dracula
 
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-set undordir=~/.vim/undo
+set undodir=~/.vim/undo
 
 set autoindent
 set backspace=indent
@@ -12,7 +28,7 @@ set backspace+=eol
 set backspace+=start
 
 set clipboard=unnamed
-if has("unnamedplus)
+if has("unnamedplus")
     set clipboard+=unnamedplus
 end
 
@@ -56,47 +72,8 @@ set t_vb=
 set wildmenu
 set winminheight=0
 
-" vundle!
-" https://github.com/VundleVim/Vundle.vim
-
-filetype off
-
-set runtimepath+=~/.vim/plugins/Vundle.vim
-
-call vundle#begin("~/.vim/plugins")
-    Plugin 'VundleVim/Vundle.vim'
-
-    Plugin 'ap/vim-css-color'
-    Plugin 'chrisbra/unicode.vim'
-    Plugin 'editorconfig/editorconfig-vim'
-    Plugin 'isRuslan/vim-es6'
-    Plugin 'jelera/vim-javascript/syntax'
-    Plugin 'moll/vim-node'
-    Plugin 'mtscout6/syntastic-local-eslint.vim'
-    Plugin 'nathanaelkane/vim-indent-guides'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/syntastic'
-
-call vundle#end()
-
-filetype on
-
-" plugins: syntastic
-
-let g:syntastic_javascript_checkers = [ 'eslint' ]
-
-let g:syntastic_mode_map = {
-    \ "active_filetypes": [],
-    \ "mode": "passive",
-    \ "passive_filetypes": []
-\}
-
 " toggle NERDtree
 map <leader>t :NERDTreeToggle<CR>
-
-" toggle syntastic
-nmap <leader>ts :SyntasticToggleMode \| w<CR>
-
 
 " make the opening of the `.vimrc` file easier.
 nmap <leader>v :vsp $MYVIMRC<CR>
