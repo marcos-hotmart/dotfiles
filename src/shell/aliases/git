@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#! /usr/bin/env bash
 
 # use `hub` as git wrapper
 # http://defunkt.github.com/hub/
