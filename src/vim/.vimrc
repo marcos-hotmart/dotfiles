@@ -1,8 +1,8 @@
+" make vim more useful
 set nocompatible
 filetype off
 
 " vundle!
-" https://github.com/VundleVim/Vundle.vim
 
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -30,13 +30,17 @@ call vundle#end()
 
 filetype plugin indent on
 
+" Syntax highlighting
+set t_Co=256
 syntax on
 color dracula
 
+" Local dirs
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 set undodir=~/.vim/undo
 
+" Set some shit
 set autoindent
 set backspace=indent
 set backspace+=eol
@@ -87,20 +91,146 @@ set t_vb=
 set wildmenu
 set winminheight=0
 
-" toggle NERDtree
-map <leader>t :NERDTreeToggle<CR>
+" Config -------------------
 
-" make the opening of the `.vimrc` file easier.
-nmap <leader>v :vsp $MYVIMRC<CR>
+" FastEscape
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
 
-" sudo write
-map <leader>W :w !sudo tee %<CR>
+" General
+augroup general_config
+    autocmd!
 
-" init prettier
-autocmd FileType javascript set formatpg=prettier\ --stdin
-autocmd BufWritePre *.js :normal gggqG
+    " speed up viewport scroll
+    nnoremap <C-e> 3<C-e>
+    nnoremap <C-y> 3<C-y>
+
+    " Fast split resizing (+,-)
+    if bufwinnr(1)
+        map + <C-W>+
+        map - <C-W>-
+    endif
+
+    " Better split switching
+    " Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l
+    map <C-j> <C-W>j
+    map <C-k> <C-W>k
+    map <C-H> <C-W>h
+    map <C-L> <C-W>l
+
+    " Sudo write (,W)
+    noremap <leader>W :w !sudo tee %<CR>
+
+    " Get output of shell cmds
+    command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
+
+    " Remap :W to :w
+    command! W write
+
+    " Hard things
+    iabbrev >> →
+    iabbrev << ←
+    iabbrev ^^ ↑
+    iabbrev VV ↓
+    iabbrev aa λ
+
+    " Clear last search (,qs)
+    map <silent> <leader>qs <Esc>:noh<CR>
+
+    " Yank from cursor to EOL
+    nnoremap Y y$
+
+    " Search and replace word under cursor (,*)
+    nnoremap <leader>* :%s/\<<C-r><C-w>\>//<Left>
+    vnoremap <leader>* "hy:%s/\V<C-r>h//<left>
+
+    " Toggle folds (<Space>)
+    nnoremap <silent> <space> :exe 'silent! normal! '.((foldclosed('.')>0)? 'zMzx' : 'zc')<CR>
+
+    " toggle NERDtree
+    map <leader>t :NERDTreeToggle<CR>
+
+    " make the opening of the `.vimrc` file easier.
+    nmap <leader>v :vsp $MYVIMRC<CR>
+
+    " init prettier
+    autocmd FileType javascript set formatpg=prettier\ --stdin
+    autocmd BufWritePre *.js :normal gggqG
+
+augroup END
+
+" Filetypes-----------------------------
+
+" C
+augroup filetype_c
+    autocmd!
+
+    autocmd BufRead,BufNewFile *.[ch] let fname = expand('<afile>:p:h') . '/types.vim'
+    autocmd BufRead,BufNewFile *.[ch] if filereadable(fname)
+    autocmd BufRead,BufNewFile *.[ch]   exe 'so ' . fname
+    autocmd BufRead,BufNewFile *.[ch] endif
+augroup END
+
+" JS
+augroup filetype_javascript
+    autocmd!
+
+    let g:javascript_conceal = 1
+augroup END
+
+" JSON
+augroup filetype_json
+    autocmd!
+
+    au BufRead,BufNewFile *.json set ft=json syntax=javascript
+augroup END
+
+" Markdown
+augroup filetype_markdown
+    autocmd!
+
+    let g:markdown_fenced_languages = ['ruby', 'html', 'javascript', 'css', 'erb=eruby.html', 'bash=sh']
+augroup END
+
+" ZSH
+augroup filetype_zsh
+    autocmd!
+
+    au BufRead,BufNewFile .zsh_rc,.functions,.commonrc set ft=zsh
+augroup END
+
+" Plugin Config--------------------------------------
+
+" airlime.vim
+augroup airline_config
+    autocmd!
+
+    let g:airline_powerline_fonts = 1
+    let g:airline_enable_syntastic = 1
+    let g:airline#extensions#tabline#buffer_nr_format = '%s '
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#fnamecollapse = 0
+    let g:airline#extensions#tabline#fnamemod = ':t'
+augroup END
+
+" syntastic.vim
+augroup syntastic_config
+    autocmd!
+
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_warning_symbol = '⚠'
+    let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+augroup END
 
 " load local settings
 if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+
