@@ -6,7 +6,6 @@ cd "$(dirname "$0")" \
 
 declare -a npmArr=(
     "npm"
-    "n"
     "yarn"
     "pure-prompt"
     "babel-cli"
@@ -20,11 +19,18 @@ declare -a npmArr=(
     "gh-pages"
     "webpack"
     "create-react-app"
+    "parcel-bundler"
 )
 
 # fonts
 install_npm_packages() {
-    echo "📦  Installing global npm packages..."
+    print_header "⏬  Switching to latest stable node version"
+    npm install -g --silent n
+    n stable
+    sleep .5
+    print_done
+    sleep 1
+    print_header "📦  Installing global npm packages..."
     for i in "${npmArr[@]}"
     do
         npm i -g "$i" --silent
