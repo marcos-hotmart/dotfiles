@@ -10,6 +10,21 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'dracula/vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'chrisbra/unicode.vim'
+Plugin 'isRuslan/vim-es6'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'mhinz/vim-signify'
+Plugin 'moll/vim-node'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 
 call vundle#end()
 
@@ -80,6 +95,10 @@ nmap <leader>v :vsp $MYVIMRC<CR>
 
 " sudo write
 map <leader>W :w !sudo tee %<CR>
+
+" init prettier
+autocmd FileType javascript set formatpg=prettier\ --stdin
+autocmd BufWritePre *.js :normal gggqG
 
 " load local settings
 if filereadable(glob("~/.vimrc.local"))
