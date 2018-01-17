@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for file in ~/shell/aliases/{git,gnu,shortcuts,npm,yarn,utils}; do
+  [ -r "$file" ] && source "$file"
+done
+unset file

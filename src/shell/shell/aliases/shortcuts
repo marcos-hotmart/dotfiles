@@ -6,14 +6,19 @@ alias o="open ."
 alias v="vim"
 alias vi="vim"
 alias x+="chmod +x"
-alias bye="sudo shutdown"
+alias restart="sudo reboot"
+alias bye="sudo shutdown -r now"
 alias get="curl -O -L"
 alias vi="vim"
 alias tk="take"
 alias reload="source ~/.zshrc"
+
+# use ccat
+alias cat="ccat"
 
 # commonly used dirs
 # dirs
 alias dev="cd ~/dev"
 alias dt="cd ~/desktop"
 alias dl="cd ~/downloads"
+alias dot="cd ~"

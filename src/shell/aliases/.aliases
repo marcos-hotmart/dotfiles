@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-for file in ./alias/.{gnu,shortcuts,git,npm,yarn,utils}; do
-  [ -r "$file" ] && source "$file"
-done
-unset file

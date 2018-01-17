@@ -1,5 +1,3 @@
-#! /usr/bin/env bash
-
 # use `hub` as git wrapper
 # http://defunkt.github.com/hub/
 hub_path=$(which hub)
@@ -23,7 +21,10 @@ alias gch="git checkout"
 alias gcb="git checkout -b"
 
 # cherry-pick
-alias gcp="git cherry-pick"
+alias gchp="git cherry-pick"
+
+# clone
+alias gcl="clone"
 
 # commit
 alias gca="git commit -am"
@@ -32,7 +33,7 @@ alias gcm="git commit --amend"
 
 # diff
 alias gdt="git difftool"
-alias gd="git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r"
+alias gd="git diff --color"
 
 # push
 alias gp="git push"

@@ -1,14 +1,38 @@
 #!/usr/bin/env/bash
 
 # source utils
-cd "$(dirname "$0")" \
-  && . "../init/helpers.sh"
+. "/Users/sara/init/helpers.sh"
 
-# clone a repo, cd into it, install
-gcl() {
-  git clone --depth=1 $1
-  cd $(basename ${1%.*})
-  yarn install
+clone() {
+  if [[ -z "$2" ]]; then
+    repo=$(basename "$1" ".git")
+  else
+    repo=$2
+  fi
+  git clone "$1" "$repo"
+  sleep 0.2
+  printf "\n"
+  print_in_purple "👉  Moving into $repo..."
+  printf "\n"
+  sleep 1
+  cd "$repo"
+  sleep 0.5
+  printf "\n"
+  if [ -n "$(ls package.json 2>/dev/null)" ]; then
+    print_in_cyan "🛠  Installing dependencies..."
+    printf "\n"
+    sleep 0.5
+    yarn &>/dev/null
+    sleep 0.5
+    printf "\n"
+    if [ $? -eq 0 ]; then
+      print_success "Done!"
+    else
+      print_error "Error: check the yarn-error.log"
+    fi
+  else
+    exit 0
+  fi
 }
 
 # list git branches all pretty
@@ -49,7 +73,7 @@ log() {
 
 # use gitignore.io cmd line tool
 gi() {
-  curl -L -s https://www.gitignore.io/api/$@ ;
+    curl -L -s https://www.gitignore.io/api/$@ ;
 }
 
 # copy SSH key to clipboard
@@ -85,7 +109,7 @@ qfind() {
 # search for string in dir
 # find_text "my path" "string"
 find_text() {
-  grep -rnw "$1" -e "$2"
+    grep -rnw "$1" -e "$2"
 }
 
 # create git.io short URL
@@ -129,13 +153,13 @@ ispy() {
 # automatically list contents on `cd`
 auto-ls() {
   emulate -L zsh;
-  hash gls >/dev/null 2>&1 && CLICOLOR_FORCE=1 gls -aFh --color --group-directories-first || ls
+  colorls -A --group-directories-first
 }
 chpwd_functions=( auto-ls $chpwd_functions )
 
 # copy w progress
-cprog() {
-  rsync -WavP --human-readable --progress $1 $2
+cp_p() {
+    rsync -WavP --human-readable --progress $1 $2
 }
 
 # whois a domain or a URL
@@ -178,58 +202,58 @@ gifify() {
 
 # shove it all into a black hole
 nullify() {
-  "$@" > /dev/null 2>&1
+    "$@" > /dev/null 2>&1
 }
 
 # delete files that match a certain pattern
 delete-files() {
-  local q="${1:-*.DS_Store}"
-  find . -type f -name "$q" -ls -delete
+    local q="${1:-*.DS_Store}"
+    find . -type f -name "$q" -ls -delete
 }
 
 # search for text within current dir
 qt() {
-  grep -ir --color=always "$*" --exclude-dir=".git" --exclude-dit="node_modules" . | less -RX
+    grep -ir --color=always "$*" --exclude-dir=".git" --exclude-dit="node_modules" . | less -RX
 }
 
 # syntax highlight JSON
 json() {
-  if [ -t 0 ]; then
-    python -mjson.tool <<< "$*" | pygmentize -l javascript;
-  else
-    python -mjson.tool | pygmentize -l javascript;
-  fi
+    if [ -t 0 ]; then
+        python -mjson.tool <<< "$*" | pygmentize -l javascript;
+    else
+        python -mjson.tool | pygmentize -l javascript;
+    fi
 }
 
 # defaulting tree
 tree() {
-  tree -aC -I '.git|node_modules|build|dist' --dirsfirst "$@" | less -FRNX;
+    tree -aC -I '.git|node_modules|build|dist' --dirsfirst "$@" | less -FRNX;
 }
 
 # 🗑
 emptytrash() {
-  print_header "🗑  Emptying trashes..."
-  sudo rm -rfv /Volumes/*/.Trashes > /dev/null
-  rm -rfv ~/.Trash/* > /dev/null
-  sudo rm -v /private/var/vm/sleepimage > /dev/null
-  print_done
+    print_header "🗑  Emptying trashes..."
+    sudo rm -rfv /Volumes/*/.Trashes > /dev/null
+    rm -rfv ~/.Trash/* > /dev/null
+    sudo rm -v /private/var/vm/sleepimage > /dev/null
+    print_done
 }
 
 # update everything
 run_update() {
-  print_header "💅  Updating programs..."
-  brew -v update > /dev/null
-  brew upgrade --force-bottle --cleanup
-  print_success "Homebrew updated"
-  npm update -g
-  print_success "Global npm packages updated"
-  confirm "Update macOS apps?"
-  if answer_is_yes; then
-    print_header "💻  Updating macOS apps..."
-    sudo softwareupdate -i -a > /dev/null
-    print_done
-  else
-    print_done
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-  fi
+    print_header "💅  Updating programs..."
+    brew -v update > /dev/null
+    brew upgrade --force-bottle --cleanup
+    print_success "Homebrew updated"
+    npm update -g
+    print_success "Global npm packages updated"
+    confirm "Update macOS apps?"
+    if answer_is_yes; then
+        print_header "💻  Updating macOS apps..."
+        sudo softwareupdate -i -a > /dev/null
+        print_done
+    else
+        print_done
+        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    fi
 }
