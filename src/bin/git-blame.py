@@ -22,7 +22,9 @@ BACKGROUND = "#282a36"
 CURRENT_LINE = "#3a3c4e"
 SELECTION = "#4d4f68"
 FOREGROUND = "#eff0eb"
+COMMENT = "#7e7f86"
 RED = "#ff5c57"
+ORANGE = "#FFA400"
 YELLOW = "#f3f99d"
 GREEN = "#5af78e"
 CYAN = "#9aedfe"
@@ -55,12 +57,12 @@ class base16_snazzy(Style):
     Keyword:                   PURPLE,    # class: 'k'
     Keyword.Constant:          "",        # class: 'kc'
     Keyword.Declaration:       "",        # class: 'kd'
-    Keyword.Namespace:         AQUA,      # class: 'kn'
+    Keyword.Namespace:         CYAN,      # class: 'kn'
     Keyword.Pseudo:            "",        # class: 'kp'
     Keyword.Reserved:          "",        # class: 'kr'
     Keyword.Type:              YELLOW,    # class: 'kt'
 
-    Operator:                  AQUA,      # class: 'o'
+    Operator:                  CYAN,      # class: 'o'
     Operator.Word:             "",        # class: 'ow' - like keywords
 
     Punctuation:               FOREGROUND,  # class: 'p'
@@ -71,7 +73,7 @@ class base16_snazzy(Style):
     Name.Builtin.Pseudo:       "",          # class: 'bp'
     Name.Class:                YELLOW,      # class: 'nc' - to be revised
     Name.Constant:             RED,         # class: 'no' - to be revised
-    Name.Decorator:            AQUA,        # class: 'nd' - to be revised
+    Name.Decorator:            CYAN,        # class: 'nd' - to be revised
     Name.Entity:               "",          # class: 'ni'
     Name.Exception:            RED,         # class: 'ne'
     Name.Function:             BLUE,        # class: 'nf'
@@ -79,7 +81,7 @@ class base16_snazzy(Style):
     Name.Label:                "",          # class: 'nl'
     Name.Namespace:            YELLOW,      # class: 'nn' - to be revised
     Name.Other:                BLUE,        # class: 'nx'
-    Name.Tag:                  AQUA,        # class: 'nt' - like a keyword
+    Name.Tag:                  CYAN,        # class: 'nt' - like a keyword
     Name.Variable:             RED,         # class: 'nv' - to be revised
     Name.Variable.Class:       "",          # class: 'vc' - to be revised
     Name.Variable.Global:      "",          # class: 'vg' - to be revised
@@ -117,7 +119,7 @@ class base16_snazzy(Style):
     Generic.Output:            "",                    # class: 'go'
     Generic.Prompt:            "bold " + COMMENT,     # class: 'gp'
     Generic.Strong:            "bold",                # class: 'gs'
-    Generic.Subheading:        "bold " + AQUA,        # class: 'gu'
+    Generic.Subheading:        "bold " + CYAN,        # class: 'gu'
     Generic.Traceback:         "",                    # class: 'gt'
   }
 
@@ -127,7 +129,7 @@ class base16_snazzy(Style):
 
 from pygments import highlight
 from pygments.lexers import guess_lexer
-from pygments.formatteres import Terminal256Formatter
+from pygments.formatters import Terminal256Formatter
 from tabulate import tabulate
 from colored import fg, bg, attr
 
@@ -148,7 +150,7 @@ def main():
     authors_by_line = lines_starting_with(gbl_raw, 'author ')
     authors_unique = sorted(list(set(authors_by_line)))
 
-    formatter = Terminal256Formatter(style=base16_tomorrow_dark)
+    formatter = Terminal256Formatter(style=base16_snazzy)
     highlighted_raw = highlight(code, guess_lexer(code), formatter)
     highlighted = highlighted_raw.split('\n')
 
