@@ -1,5 +1,4 @@
 ![dotfiles banner](banner.png)
-# dotfiles
 
 ```
 src/
